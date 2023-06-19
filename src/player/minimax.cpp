@@ -34,18 +34,19 @@ void read_board(std::ifstream& fin) {
 
 
 /**
- * @brief randomly choose a move and then write it into output file
+ * @brief minimax choose a move and then write it into output file
  * 
  * @param fout 
  */
 void write_valid_spot(std::ofstream& fout) {
   // Keep updating the output until getting killed.
+  int depth = 3;
   while(true) {
-    // Choose a random spot.
-    auto move = Minimax::get_move(root, 0);
+    // Choose a minimax spot.
+    auto move = Minimax::get_move(root, depth);
     fout << move.first.first << " " << move.first.second << " "\
          << move.second.first << " " << move.second.second << std::endl;
-    
+    // depth += 1;
     // Remember to flush the output to ensure the last action is written to file.
     fout.flush();
     break;
