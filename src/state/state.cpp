@@ -1,10 +1,11 @@
 #include <iostream>
 #include <sstream>
 #include <cstdint>
+#include <map>
 
 #include "./state.hpp"
 #include "../config.hpp"
-
+using namespace std;
 
 /**
  * @brief evaluate the state
@@ -13,7 +14,23 @@
  */
 int State::evaluate(){
   // [TODO] design your own evaluation function
-  return 0;
+  int board_score = 0;
+  map<int, int> score = {{1, 10}, {2, 50}, {3, 32}, {4, 33}, {5, 90}, {6, 2000}};
+  for(int i=0; i<BOARD_H; i++){
+    for(int j=0; j<BOARD_W; j++){
+      for(auto& c : score){
+        if(this->board.board[this->player][i][j] == c.first){
+          board_score += c.second;
+          break;
+        }
+        else if(this->board.board[1-this->player][i][j] == c.first){
+          board_score -= c.second;
+          break;
+        }
+      }
+    }
+  }
+  return board_score;
 }
 
 
