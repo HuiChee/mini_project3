@@ -3,7 +3,7 @@
 
 #include "../config.hpp"
 #include "../state/state.hpp"
-#include "../policy/alpha_beta_pruning.hpp"
+#include "../policy/submission.hpp"
 
 
 State* root;
@@ -34,7 +34,7 @@ void read_board(std::ifstream& fin) {
 
 
 /**
- * @brief minimax choose a move and then write it into output file
+ * @brief alpha_beta_pruning choose a move and then write it into output file
  * 
  * @param fout 
  */
@@ -42,8 +42,8 @@ void write_valid_spot(std::ofstream& fout) {
   // Keep updating the output until getting killed.
   int depth = 5;
   while(true) {
-    // Choose a minimax spot.
-    auto move = Alpha_Beta_Pruning::get_move(root, depth);
+    // Choose a alpha_beta_pruning spot.
+    auto move = Submission::get_move(root, depth);
     fout << move.first.first << " " << move.first.second << " "\
          << move.second.first << " " << move.second.second << std::endl;
     // depth += 1;
